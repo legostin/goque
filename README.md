@@ -28,8 +28,9 @@ $data = [
                ];
                Yii::$app->redis->rpush("tasks",Json::encode($data));
 ```
+*
 ```PHP
-* '$data = [
+$data = [
                    "url" => "http://allawin.mars.studio/site/test-read-que",
                    "method" => "POST",
                    "tag" => "task.test",
