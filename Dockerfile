@@ -7,5 +7,5 @@ ENV SRC_DIR=/go/src/github.com/legostin/goque/
 ADD . $SRC_DIR
 # Build it:
 RUN cd $SRC_DIR; go get github.com/go-redis/redis
-RUN cd $SRC_DIR; go run -o main; cp main /app/
+RUN cd $SRC_DIR; go run main.go;
 ENTRYPOINT ["./"]
