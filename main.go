@@ -13,7 +13,7 @@ import (
 
 func NewRedisClient() *redis.Client {
 	client := redis.NewClient(&redis.Options{
-		Addr:     "allawin.mars.studio:6379",
+		Addr:     "Redis:6379",
 		Password: "", // no password set
 		DB:       0,  // use default DB
 	})
