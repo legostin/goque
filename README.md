@@ -1,6 +1,6 @@
 # Goque — Микросервис для работы с очередью http/https запросов
 **Запуск**
-* Для запуска необходим  Docker
+* Для запуска желателен  Docker
 * Запущенный контейнер с Redis
 * ```git clone https://github.com/legostin/goque.git```
 * ```cd goque```
