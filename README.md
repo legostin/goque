@@ -4,7 +4,7 @@
 * Запущенный контейнер с Redis
 * ```git clone https://github.com/legostin/goque.git```
 * ```cd goque```
-* ```docker build -f ./Dockerfile .```
+* ```docker --network=<your network> build -f ./Dockerfile .```
 
 
 **Пример использования в PHP скрипте**
@@ -31,7 +31,7 @@ $data = [
 *
 ```PHP
 $data = [
-                   "url" => "http://allawin.mars.studio/site/test-read-que",
+                   "url" => "https://google.com",
                    "method" => "POST",
                    "tag" => "task.test",
                    "params" => ["foo_post"=>"bar"]
