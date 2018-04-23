@@ -9,8 +9,8 @@
 
 **Пример использования в PHP скрипте**
 
-
-*```PHP
+*
+```PHP
 $data = [
                 "url" => "https://google.com",
                 "method" => "POST",
@@ -19,8 +19,8 @@ $data = [
             ];
             Yii::$app->redis->rpush("tasks",Json::encode($data));
 ```
-
-*```PHP
+*
+```PHP
 $data = [
                    "url" => "https://google.com",
                    "method" => "GET",
@@ -29,8 +29,8 @@ $data = [
                ];
                Yii::$app->redis->rpush("tasks",Json::encode($data));
 ```
-
-*```PHP
+*
+```PHP
 $data = [
                    "url" => "https://google.com",
                    "method" => "POST",
