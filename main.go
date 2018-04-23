@@ -29,24 +29,22 @@ func NewRedisClient() *redis.Client {
 }
 
 func doRequest(req *http.Request, client *redis.Client, requestData string) {
-	// Выполняем запрос запрос
+	// Выполняем запрос
 	client_http := &http.Client{}
 	resp, err := client_http.Do(req)
 	if err != nil {
-	panic(err) // Че то не то, роняем скрипт и выдаем эксепшн
+		client.LPush("tasks",requestData)
+		main() // Че то не то,  перезапускаем все
 	}
 	defer resp.Body.Close() //Не забывае закрывать соединение, мы не хотим утечек памяти
 
 	// Удаленный сервер ответил некорректно, ставим данный запрос в начало очереди
 	if resp.Status!="200 OK" {
-	fmt.Println("wrong status")
-	client.LPush("tasks",requestData)
+		client.LPush("tasks",requestData)
 	}
-	fmt.Println("response Status:", resp.Status)
 }
 
 func main() {
-	print ("send http Request daemon")
 	client := NewRedisClient()
 	// Поскольку список хэдеров заранее не определен, то определяем интерфейс
 	type Headers map[string]interface{}
@@ -66,7 +64,6 @@ func main() {
 		if err == redis.Nil {
 			// Очередь запросов Пуста, ждем секунду, чтобы не перезагружать редис запросами
 			time.Sleep(time.Second)
-			fmt.Println("Queue is empty")
 		} else if err != nil {
 			// Что-то случилось Редисом, ждем 10 секунд и пытаемся переподключиться
 			time.Sleep(time.Second*10)
