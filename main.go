@@ -36,9 +36,10 @@ func doRequest(req *http.Request, client *redis.Client, requestData string) {
 		client.LPush("tasks",requestData)
 		main() // Че то не то,  перезапускаем все
 	}
-	defer resp.Body.Close() //Не забывае закрывать соединение, мы не хотим утечек памяти
+	defer resp.Body.Close() //Не забываем закрывать соединение, мы не хотим утечек памяти
 
 	// Удаленный сервер ответил некорректно, ставим данный запрос в начало очереди
+	//TODO надо будет добавить счетчик попыток, если больше 10 то удалять из очереди
 	if resp.Status!="200 OK" {
 		client.LPush("tasks",requestData)
 	}
@@ -114,7 +115,7 @@ func main() {
 						req.Header.Set(key, value.(string))
 					}
 				}
-				// Выполняем запрос запрос
+				// Выполняем запрос
 				if (err!=nil){
 					main()
 				}
@@ -140,10 +141,7 @@ func main() {
 					main()
 				}
 				doRequest(req,client,requestData)
-
-
 			}
 		}
 	}
-
 }
